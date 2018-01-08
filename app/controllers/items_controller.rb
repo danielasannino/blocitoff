@@ -6,14 +6,11 @@ class ItemsController < ApplicationController
 
         if @item.save
             flash[:notice] = "To-Do List was updated."
+            redirect_to user_path(current_user)
         else
             flash.now[:alert] = "There was an error creating the new to-do item. Please try again later."
         end
 
-        respond_to do |format|
-            format.html
-            format.js
-        end
     end
 
     private
@@ -21,5 +18,5 @@ class ItemsController < ApplicationController
     def item_params
         params.require(:item).permit(:name)
     end
-    
+
 end
